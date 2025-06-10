@@ -1,0 +1,24 @@
+{
+  "name": "carbon-intensity-tracker-api",
+  "version": "1.0.0",
+  "description": "API that allows users to read, update, delete and store national carbon intensity values",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Calum Brunt",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0",
+    "reflect-metadata": "^0.2.2",
+    "sqlite3": "^5.1.7",
+    "typeorm": "^0.3.24"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.0.0",
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}
