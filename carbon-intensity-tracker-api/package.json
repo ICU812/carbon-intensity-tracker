@@ -4,6 +4,9 @@
   "description": "API that allows users to read, update, delete and store national carbon intensity values",
   "main": "index.js",
   "scripts": {
+    "start": "ts-node src/app.ts",
+    "dev": "nodemon src/app.ts",
+    "build": "tsc",
     "test": "test"
   },
   "author": "Calum Brunt",

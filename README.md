@@ -21,6 +21,12 @@ cd carbon-intensity-tracker-api && npm install
 cd ../carbon-intensity-tracker-ui && npm install
 ```
 
+### Local development
+
+```bash
+cd cd carbon-intensity-tracker-api && npm run dev
+```
+
 ## Help
 
 Any advice for common problems or issues.
