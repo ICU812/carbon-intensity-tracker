@@ -17,8 +17,8 @@ The things you need before installing the software.
 
 1. Install dependencies:  
 ```bash
-cd backend && npm install
-cd ../frontend && npm install
+cd carbon-intensity-tracker-api && npm install
+cd ../carbon-intensity-tracker-ui && npm install
 ```
 
 ## Help
