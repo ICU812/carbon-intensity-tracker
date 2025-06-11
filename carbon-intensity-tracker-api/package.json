@@ -7,7 +7,8 @@
     "start": "ts-node src/app.ts",
     "dev": "nodemon src/app.ts",
     "build": "tsc",
-    "test": "test"
+    "test": "test",
+    "seed": "ts-node src/db/seed.ts"
   },
   "author": "Calum Brunt",
   "license": "ISC",
@@ -18,6 +19,8 @@
     "typeorm": "^0.3.24"
   },
   "devDependencies": {
+    "csv-parser": "^3.2.0",
+    "fs": "^0.0.1-security",
     "@types/express": "^5.0.3",
     "@types/node": "^24.0.0",
     "nodemon": "^3.1.10",
