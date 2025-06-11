@@ -4,40 +4,53 @@ Full Stack Developer Technical Interview Test — Carbon Intensity Tracker
 ## Description
 A REACT + Node.js web application that allows users to read, update, delete and store national carbon intensity values.
 
-## Getting Started
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+Built with:
 
-### Prerequisites
+- React + Vite (frontend)
+- Node.js + Express (backend)
+- SQLite + TypeORM (database)
 
-The things you need before installing the software.
+## Project Structure
+- `carbon-intensity-tracker-api/` — backend (Node.js, Express, SQLite) (WIP)
+- `carbon-intensity-tracker-ui/` — frontend (React, Vite) (Not yet implemented)
 
-- 
+## Prerequisites
 
-### Installation
+- Node.js (>= 22.x recommended)
+- npm (>= 10.x)
 
-1. Install dependencies:  
+## Installation
+
+1. Install dependencies:
+
 ```bash
 cd carbon-intensity-tracker-api && npm install
 cd ../carbon-intensity-tracker-ui && npm install
 ```
 
-### Local development
+## Local development
+
+Before running the api for the first time, seed the database:
 
 ```bash
-cd cd carbon-intensity-tracker-api && npm run dev
+cd carbon-intensity-tracker-api && npm run seed
 ```
 
-## Help
-
-Any advice for common problems or issues.
-```
-command to run if program contains helper info
+```bash
+cd carbon-intensity-tracker-api && npm run dev
 ```
 
-## Tech Stack
-- Frontend: React (Vite)
-- Backend: Node.js + Express
-- Database: SQLite + TypeORM
+## API Endpoints
+
+- `GET /api/intensity` — Get all carbon intensity records
+
+## Troubleshooting
+
+- Ensure database is seeded before running backend.
+    - carbon-intensity-tracker-api/src/db/carbon_intensity.sqlite
+- Ensure correct Node.js version is installed.
+- Check logs if any errors occur on startup.
+
 
 ## Authors
 Calum Brunt
