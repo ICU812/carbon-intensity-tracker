@@ -3,7 +3,5 @@
 
 set -e
 
-npx npm run build
-npx npm run test
-echo "Previous exit code: $?"
-exit $?
+npm run build || exit 1
+npm run test || exit 1
