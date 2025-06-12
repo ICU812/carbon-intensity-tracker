@@ -7,7 +7,8 @@
     "dev": "ts-node-dev --respawn --transpile-only --ignore-watch node_modules src/app.ts",
     "build": "tsc",
     "start": "ts-node src/app.ts",
-    "seed": "ts-node src/db/seed.ts"
+    "seed": "ts-node src/db/seed.ts",
+    "test": "jest"
   },
   "author": "Calum Brunt",
   "license": "ISC",
@@ -18,11 +19,14 @@
     "typeorm": "^0.3.24"
   },
   "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^24.0.0",
     "csv-parser": "^3.2.0",
     "fs": "^0.0.1-security",
-    "@types/express": "^5.0.3",
-    "@types/node": "^24.0.0",
+    "jest": "^29.7.0",
     "nodemon": "^3.1.10",
+    "ts-jest": "^29.3.4",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   }
