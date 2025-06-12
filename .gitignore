@@ -1,6 +1,28 @@
-node_modules
-build
-dist
+# Node dependencies
+node_modules/
+
+# TypeScript build output
+dist/
+
+# Logs
+logs
 npm-debug.log
+*.log
+
+# Coverage reports
+coverage/
+
+# Environment variables
 .env
+
+# OS system files
 .DS_Store
+Thumbs.db
+ehthumbs.db
+
+# Editor/IDE files
+*.swp
+*.swo
+*.swn
+.idea/
+.vscode/

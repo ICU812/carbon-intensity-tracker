@@ -10,7 +10,8 @@ const config: Config = {
       }
     ]
   },
-  modulePathIgnorePatterns: ['<rootDir>/dist/']
+  modulePathIgnorePatterns: ['<rootDir>/dist/'],
+  collectCoverageFrom: ['src/**/*.ts']
 };
 
 export default config;
