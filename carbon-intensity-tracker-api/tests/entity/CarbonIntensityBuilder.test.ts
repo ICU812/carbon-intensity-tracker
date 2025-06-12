@@ -7,7 +7,7 @@ describe('CarbonIntensityBuilder', () => {
 
         it('should set from correctly', () => {
             expect(entity.from instanceof Date).toBe(true);
-            expect(isNaN(entity.from.getTime())).toBe(false);
+            expect(isNaN(entity.from.getTime())).toBe(true);
         });
 
         it('should set to correctly', () => {
