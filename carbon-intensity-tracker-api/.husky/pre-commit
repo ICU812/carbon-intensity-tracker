@@ -3,5 +3,5 @@
 
 set -e
 
-npm run build
-npm run test
+npx npm run build
+npx npm run test
