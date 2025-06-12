@@ -10,7 +10,8 @@
     "start": "ts-node src/app.ts",
     "seed": "ts-node src/db/seed.ts",
     "test": "jest",
-    "clean": "rm -rf dist && rm -rf node_modules && rm package-lock.json"
+    "clean": "rm -rf dist && rm -rf node_modules && rm package-lock.json",
+    "prepare": "husky"
   },
   "author": "Calum Brunt",
   "license": "ISC",

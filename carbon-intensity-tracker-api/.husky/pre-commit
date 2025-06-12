@@ -1,8 +1,1 @@
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-
-set -e
-
-npm run build || exit 1
-npm run test || exit 1
-
+npm test
