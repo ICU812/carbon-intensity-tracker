@@ -18,7 +18,7 @@ const startServer = async () => {
             AppDataSource.getRepository(CarbonIntensity)
         );
 
-        app.get('/api/intensity', async (req, res) => {
+        app.get('/api/intensity', async (_req, res) => {
             try {
                 const record = await carbonIntensityRepo.findAll();
                 res.json(record);

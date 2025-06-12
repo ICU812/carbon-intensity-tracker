@@ -1,9 +1,7 @@
-import { CarbonIntensityBuilder } from './CarbonIntensityBuilder';
+import { CarbonIntensityBuilder } from '../../src/entity/CarbonIntensityBuilder';
 
 describe('CarbonIntensityBuilder', () => {
     describe('should build entity with correct default values', () => {
-
-        const now = new Date();
         const entity = new CarbonIntensityBuilder()
             .build();
 

@@ -2,13 +2,15 @@
   "name": "carbon-intensity-tracker-api",
   "version": "1.0.0",
   "description": "API that allows users to read, update, delete and store national carbon intensity values",
-  "main": "index.js",
+  "type": "module",
+  "main": "dist/app.js",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only --ignore-watch node_modules src/app.ts",
     "build": "tsc",
     "start": "ts-node src/app.ts",
     "seed": "ts-node src/db/seed.ts",
-    "test": "jest"
+    "test": "jest",
+    "clean": "rm -rf dist && rm -rf node_modules && rm package-lock.json"
   },
   "author": "Calum Brunt",
   "license": "ISC",
@@ -23,7 +25,6 @@
     "@types/jest": "^29.5.14",
     "@types/node": "^24.0.0",
     "csv-parser": "^3.2.0",
-    "fs": "^0.0.1-security",
     "jest": "^29.7.0",
     "nodemon": "^3.1.10",
     "ts-jest": "^29.3.4",
