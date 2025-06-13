@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 import { DataSource } from 'typeorm';
-import { CarbonIntensity } from '../entity/CarbonIntensity';
+import { CarbonIntensity } from '../entity/CarbonIntensity.ts';
 
 export const AppDataSource = new DataSource({
   type: 'sqlite',

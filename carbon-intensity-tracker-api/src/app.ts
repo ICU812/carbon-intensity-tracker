@@ -1,7 +1,7 @@
 import express from 'express';
-import { AppDataSource } from './db/data-source';
-import { CarbonIntensity } from './entity/CarbonIntensity';
-import { CarbonIntensityRepository } from './repository/CarbonIntensityRepository';
+import { AppDataSource } from './db/data-source.ts';
+import { CarbonIntensity } from './entity/CarbonIntensity.ts';
+import { CarbonIntensityRepository } from './repository/CarbonIntensityRepository.ts';
 
 const app = express();
 const PORT = 3001;

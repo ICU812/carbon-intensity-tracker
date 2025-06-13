@@ -1,5 +1,5 @@
 import { Repository } from 'typeorm';
-import { CarbonIntensity } from '../entity/CarbonIntensity';
+import { CarbonIntensity } from '../entity/CarbonIntensity.ts';
 
 export class CarbonIntensityRepository {
   constructor(private readonly repo: Repository<CarbonIntensity>) { }

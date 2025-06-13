@@ -1,4 +1,4 @@
-import { CarbonIntensity } from './CarbonIntensity';
+import { CarbonIntensity } from './CarbonIntensity.ts';
 
 export class CarbonIntensityBuilder {
     private readonly data: Omit<CarbonIntensity, 'id'>;

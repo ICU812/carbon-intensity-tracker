@@ -1,9 +1,10 @@
-import { AppDataSource } from './data-source';
-import { CarbonIntensity } from '../entity/CarbonIntensity';
-import { CarbonIntensityBuilder } from '../entity/CarbonIntensityBuilder';
+import { AppDataSource } from './data-source.ts';
+import { CarbonIntensity } from '../entity/CarbonIntensity.ts';
+import { CarbonIntensityBuilder } from '../entity/CarbonIntensityBuilder.ts';
 import csv from 'csv-parser';
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
 import { promisify } from 'util';
 import stream from 'stream';
 
@@ -30,6 +31,8 @@ const seedDatabase = async () => {
 
     await AppDataSource.getRepository(CarbonIntensity).clear();
 
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = path.dirname(__filename);
     const filePath = path.join(__dirname, './carbon-intensity-data.csv');
     const rows = await parseCsv(filePath);
 
