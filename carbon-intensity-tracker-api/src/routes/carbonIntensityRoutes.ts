@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { getCarbonIntensity } from '../controller/getCarbonIntensity.ts';
 import { AppDataSource } from '../db/data-source.ts';
-import { CarbonIntensity } from '../entity/CarbonIntensity.ts';
+import { CarbonIntensity } from '../domain/entity/CarbonIntensity.ts';
 import { CarbonIntensityRepository } from '../repository/CarbonIntensityRepository.ts';
 import { CarbonIntensityService } from '../service/CarbonIntensityService.ts';
 

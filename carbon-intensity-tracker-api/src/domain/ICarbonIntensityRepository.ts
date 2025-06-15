@@ -1,4 +1,4 @@
-import { CarbonIntensity } from "../entity/CarbonIntensity.ts";
+import { CarbonIntensity } from "./entity/CarbonIntensity.ts";
 
 export interface ICarbonIntensityRepository {
     findAll(): Promise<CarbonIntensity[]>;

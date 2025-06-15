@@ -1,5 +1,5 @@
 import { DataSource } from 'typeorm';
-import { CarbonIntensity } from '../../src/entity/CarbonIntensity';
+import { CarbonIntensity } from '../../src/domain/entity/CarbonIntensity';
 import { CarbonIntensityRepository } from '../../src/repository/CarbonIntensityRepository';
 
 describe('CarbonIntensityRepository Integration Test', () => {

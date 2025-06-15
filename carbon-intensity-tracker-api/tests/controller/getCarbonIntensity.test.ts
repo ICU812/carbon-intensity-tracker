@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { getCarbonIntensity } from '../../src/controller/getCarbonIntensity.ts';
 import { CarbonIntensityService } from '../../src/service/CarbonIntensityService.ts';
-import { CarbonIntensity } from '../../src/entity/CarbonIntensity.ts';
+import { CarbonIntensity } from '../../src/domain/entity/CarbonIntensity.ts';
 
 describe('getCarbonIntensity controller', () => {
     let mockService: CarbonIntensityService;

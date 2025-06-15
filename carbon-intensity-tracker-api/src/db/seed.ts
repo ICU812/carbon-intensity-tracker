@@ -1,6 +1,6 @@
 import { AppDataSource } from './data-source.ts';
-import { CarbonIntensity } from '../entity/CarbonIntensity.ts';
-import { CarbonIntensityBuilder } from '../entity/CarbonIntensityBuilder.ts';
+import { CarbonIntensity } from '../domain/entity/CarbonIntensity.ts';
+import { CarbonIntensityBuilder } from '../domain/entity/CarbonIntensityBuilder.ts';
 import csv from 'csv-parser';
 import fs from 'fs';
 import path from 'path';

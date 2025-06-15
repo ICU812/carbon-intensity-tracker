@@ -1,8 +1,8 @@
 import { Repository } from 'typeorm';
-import { CarbonIntensity } from '../entity/CarbonIntensity.ts';
+import { CarbonIntensity } from '../domain/entity/CarbonIntensity.ts';
 import { ICarbonIntensityRepository } from '../domain/ICarbonIntensityRepository.ts';
 
-export class CarbonIntensityRepository implements ICarbonIntensityRepository{
+export class CarbonIntensityRepository implements ICarbonIntensityRepository {
   constructor(private readonly repo: Repository<CarbonIntensity>) { }
 
   async findAll() {
