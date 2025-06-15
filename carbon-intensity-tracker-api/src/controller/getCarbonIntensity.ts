@@ -7,7 +7,11 @@ export const getCarbonIntensity = (carbonIntensityService: CarbonIntensityServic
             const carbonIntensities = await carbonIntensityService.getAllIntensities();
             res.json(carbonIntensities);
         } catch (err) {
-            console.error('Error fetching data:', err);
+            if (err instanceof Error) {
+                console.error('Error fetching data:', err.message);
+            } else {
+                console.error('Error fetching data:', err);
+            }
             res.status(500).json({ error: 'Internal server error' });
         }
     };
