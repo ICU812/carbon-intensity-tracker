@@ -1,5 +1,5 @@
-import { CarbonIntensityBuilder } from '../../src/entity/CarbonIntensityBuilder';
-import { CarbonIntensity } from '../../src/entity/CarbonIntensity';
+import { CarbonIntensityBuilder } from '../../src/domain/entity/CarbonIntensityBuilder';
+import { CarbonIntensity } from '../../src/domain/entity/CarbonIntensity';
 
 describe('CarbonIntensityBuilder', () => {
     describe('should build entity with correct default values', () => {

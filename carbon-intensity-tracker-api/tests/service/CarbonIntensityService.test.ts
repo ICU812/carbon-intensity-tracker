@@ -1,4 +1,4 @@
-import { CarbonIntensity } from '../../src/entity/CarbonIntensity.ts';
+import { CarbonIntensity } from '../../src/domain/entity/CarbonIntensity.ts';
 import { ICarbonIntensityRepository } from '../../src/domain/ICarbonIntensityRepository.ts';
 import { CarbonIntensityService } from '../../src/service/CarbonIntensityService.ts';
 
