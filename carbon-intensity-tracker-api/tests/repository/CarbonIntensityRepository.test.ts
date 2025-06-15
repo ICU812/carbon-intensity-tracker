@@ -1,44 +1,42 @@
-import { CarbonIntensityRepository } from '../../src/repository/CarbonIntensityRepository';
-import { CarbonIntensity } from '../../src/domain/entity/CarbonIntensity';
+import { CarbonIntensityRepository } from '../../src/repository/CarbonIntensityRepository.ts';
+import { CarbonIntensityPeriod } from '../../src/domain/entity/CarbonIntensityPeriod.ts';
+import { GenerationMix } from '../../src/domain/entity/GenerationMix.ts';
+import { FuelType } from '../../src/domain/value-objects/FuelType.ts';
 import { Repository } from 'typeorm';
 
 describe('CarbonIntensityRepository', () => {
   let repository: CarbonIntensityRepository;
-  let mockRepo: jest.Mocked<Repository<CarbonIntensity>>;
+  let mockRepo: jest.Mocked<Repository<CarbonIntensityPeriod>>;
 
-  mockRepo = {
-    find: jest.fn(),
-  } as unknown as jest.Mocked<Repository<CarbonIntensity>>;
+  beforeEach(() => {
+    mockRepo = {
+      find: jest.fn(),
+    } as unknown as jest.Mocked<Repository<CarbonIntensityPeriod>>;
 
-  repository = new CarbonIntensityRepository(mockRepo);
-
+    repository = new CarbonIntensityRepository(mockRepo);
+  });
 
   it('should call repo.find() and return all entities', async () => {
-    const carbonIntensity: CarbonIntensity =
-    {
+    const generationMix: GenerationMix[] = [
+      Object.assign(new GenerationMix(), { fuel: FuelType.Gas, percentage: 40 }),
+      Object.assign(new GenerationMix(), { fuel: FuelType.Coal, percentage: 10 }),
+    ];
+
+    const carbonIntensityPeriod: CarbonIntensityPeriod = Object.assign(new CarbonIntensityPeriod(), {
       id: 1,
       from: new Date('2025-06-12T00:00:00Z'),
       to: new Date('2025-06-12T01:00:00Z'),
-      intensity_forecast: 100,
-      intensity_actual: 95,
+      forecast: 100,
+      actual: 95,
       index: 'moderate',
-      gas: 40,
-      coal: 10,
-      biomass: 5,
-      nuclear: 20,
-      hydro: 3,
-      imports: 7,
-      wind: 10,
-      solar: 8,
-      other: 2,
-      total: 105,
-    };
+      generationMix: generationMix
+    });
 
-    mockRepo.find.mockResolvedValue([carbonIntensity]);
+    mockRepo.find.mockResolvedValue([carbonIntensityPeriod]);
 
     const result = await repository.findAll();
 
     expect(mockRepo.find).toHaveBeenCalledTimes(1);
-    expect(result).toEqual([carbonIntensity]);
+    expect(result).toEqual([carbonIntensityPeriod]);
   });
 });

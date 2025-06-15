@@ -1,59 +1,51 @@
-import { Request, Response } from 'express';
 import { getCarbonIntensity } from '../../src/controller/getCarbonIntensity.ts';
 import { CarbonIntensityService } from '../../src/service/CarbonIntensityService.ts';
-import { CarbonIntensity } from '../../src/domain/entity/CarbonIntensity.ts';
+import { Request, Response } from 'express';
 
-describe('getCarbonIntensity controller', () => {
-    let mockService: CarbonIntensityService;
+describe('CarbonIntensityController', () => {
+    let service: jest.Mocked<CarbonIntensityService>;
     let req: Partial<Request>;
     let res: Partial<Response>;
 
     beforeEach(() => {
-        mockService = {
-            getAllIntensities: jest.fn()
-        } as unknown as CarbonIntensityService;
+        service = {
+            getAll: jest.fn(),
+        } as unknown as jest.Mocked<CarbonIntensityService>;
 
         req = {};
         res = {
             json: jest.fn(),
-            status: jest.fn().mockReturnThis()
+            status: jest.fn().mockReturnThis(),
         };
     });
 
-    it('should return carbon intensities successfully', async () => {
-        const carbonIntensityList: CarbonIntensity[] =
-            [{
-                id: 1,
-                from: new Date('2025-06-12T00:00:00Z'),
-                to: new Date('2025-06-12T01:00:00Z'),
-                intensity_forecast: 100,
-                intensity_actual: 95,
-                index: 'moderate',
-                gas: 40,
-                coal: 10,
-                biomass: 5,
-                nuclear: 20,
-                hydro: 3,
-                imports: 7,
-                wind: 10,
-                solar: 8,
-                other: 2,
-                total: 105,
-            }
-            ];
+    it('should return intensity data from service', async () => {
+        const mockData = {
+            data: [
+                {
+                    from: new Date(Date.UTC(2025, 5, 12, 0, 0, 0)),
+                    to: new Date(Date.UTC(2025, 5, 12, 1, 0, 0)),
+                    intensity: {
+                        forecast: 100,
+                        actual: 95,
+                        index: 'moderate',
+                    },
+                },
+            ],
+        };
 
-        (mockService.getAllIntensities as jest.Mock).mockResolvedValue(carbonIntensityList);
+        service.getAll.mockResolvedValue(mockData);
 
-        await getCarbonIntensity(mockService)(req as Request, res as Response);
+        await getCarbonIntensity(service)(req as Request, res as Response);
 
-        expect(mockService.getAllIntensities).toHaveBeenCalled();
-        expect(res.json).toHaveBeenCalledWith(carbonIntensityList);
+        expect(res.json).toHaveBeenCalledWith(mockData);
+        expect(service.getAll).toHaveBeenCalledTimes(1);
     });
 
-    it('should throw internal server error if unexpected error occurs', async () => {
-        (mockService.getAllIntensities as jest.Mock).mockRejectedValue(new Error('Unit test simulated DB error'));
+    it('should handle errors correctly', async () => {
+        service.getAll.mockRejectedValue(new Error('Unit test simulated DB error'));
 
-        await getCarbonIntensity(mockService)(req as Request, res as Response);
+        await getCarbonIntensity(service)(req as Request, res as Response);
 
         expect(res.status).toHaveBeenCalledWith(500);
         expect(res.json).toHaveBeenCalledWith({ error: 'Internal server error' });

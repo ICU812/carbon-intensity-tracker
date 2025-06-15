@@ -1,6 +1,6 @@
-import { CarbonIntensity } from "./entity/CarbonIntensity.ts";
+import { CarbonIntensityPeriod } from "./entity/CarbonIntensityPeriod.ts";
 
-export interface ICarbonIntensityRepository {
-    findAll(): Promise<CarbonIntensity[]>;
-    save(entity: CarbonIntensity): Promise<CarbonIntensity>;
+export interface ICarbonIntensityPeriodRepository {
+    findAll(): Promise<CarbonIntensityPeriod[]>;
+    save(entity: CarbonIntensityPeriod): Promise<CarbonIntensityPeriod>;
 }

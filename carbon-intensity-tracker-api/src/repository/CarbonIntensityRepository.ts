@@ -1,15 +1,15 @@
 import { Repository } from 'typeorm';
-import { CarbonIntensity } from '../domain/entity/CarbonIntensity.ts';
-import { ICarbonIntensityRepository } from '../domain/ICarbonIntensityRepository.ts';
+import { CarbonIntensityPeriod } from '../domain/entity/CarbonIntensityPeriod.ts';
+import { ICarbonIntensityPeriodRepository } from '../domain/ICarbonIntensityRepository.ts';
 
-export class CarbonIntensityRepository implements ICarbonIntensityRepository {
-  constructor(private readonly repo: Repository<CarbonIntensity>) { }
+export class CarbonIntensityRepository implements ICarbonIntensityPeriodRepository {
+  constructor(private readonly repo: Repository<CarbonIntensityPeriod>) { }
 
   async findAll() {
     return await this.repo.find();
   }
 
-  async save(entity: CarbonIntensity) {
+  async save(entity: CarbonIntensityPeriod) {
     return await this.repo.save(entity);
   }
 }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { fetchCarbonIntensity, type CarbonIntensity } from '../services/carbonIntensityService';
+import { fetchCarbonIntensity, } from '../services/carbonIntensityService';
+import type { CarbonIntensity } from '../types/CarbonIntensity';
 
 export const Dashboard: React.FC = () => {
     const [data, setData] = useState<CarbonIntensity[] | null>(null);
@@ -7,11 +8,10 @@ export const Dashboard: React.FC = () => {
     const [error, setError] = useState<string | null>(null);
 
     const handleLoadData = async () => {
-        console.log('Button has been clicked')
+        console.log('Button has been clicked');
         setLoading(true);
         setError(null);
         try {
-            console.log('Button has been clicked')
             const result = await fetchCarbonIntensity();
             setData(result);
         } catch (err) {
@@ -43,15 +43,17 @@ export const Dashboard: React.FC = () => {
                             <th>To</th>
                             <th>Forecast</th>
                             <th>Actual</th>
+                            <th>Index</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {data.map(record => (
-                            <tr key={record.id}>
+                        {data.map((record, idx) => (
+                            <tr key={idx}>
                                 <td>{record.from}</td>
                                 <td>{record.to}</td>
-                                <td>{record.intensity_forecast}</td>
-                                <td>{record.intensity_actual}</td>
+                                <td>{record.intensity.forecast}</td>
+                                <td>{record.intensity.actual}</td>
+                                <td>{record.intensity.index}</td>
                             </tr>
                         ))}
                     </tbody>

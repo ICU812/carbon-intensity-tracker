@@ -1,39 +1,52 @@
-import { CarbonIntensity } from '../../src/domain/entity/CarbonIntensity.ts';
-import { ICarbonIntensityRepository } from '../../src/domain/ICarbonIntensityRepository.ts';
+import { CarbonIntensityPeriod } from '../../src/domain/entity/CarbonIntensityPeriod.ts';
+import { GenerationMix } from '../../src/domain/entity/GenerationMix.ts';
+import { FuelType } from '../../src/domain/value-objects/FuelType.ts';
+import { CarbonIntensityRepository } from '../../src/repository/CarbonIntensityRepository.ts';
 import { CarbonIntensityService } from '../../src/service/CarbonIntensityService.ts';
 
 describe('CarbonIntensityService', () => {
-    it('should return all intensities', async () => {
-        const carbonIntensityList: CarbonIntensity[] =
-            [{
-                id: 1,
-                from: new Date('2025-06-12T00:00:00Z'),
-                to: new Date('2025-06-12T01:00:00Z'),
-                intensity_forecast: 100,
-                intensity_actual: 95,
-                index: 'moderate',
-                gas: 40,
-                coal: 10,
-                biomass: 5,
-                nuclear: 20,
-                hydro: 3,
-                imports: 7,
-                wind: 10,
-                solar: 8,
-                other: 2,
-                total: 105,
-            }
-            ];
+  it('should return all intensities', async () => {
+    const fromUtc = new Date(Date.UTC(2025, 5, 12, 0, 0, 0));
+    const toUtc = new Date(Date.UTC(2025, 5, 12, 1, 0, 0));
 
-        const mockRepo: ICarbonIntensityRepository = {
-            findAll: jest.fn().mockResolvedValue(carbonIntensityList),
-            save: jest.fn()
-        };
-        const service = new CarbonIntensityService(mockRepo);
+    const generationMix: GenerationMix[] = [
+      Object.assign(new GenerationMix(), { fuel: FuelType.Gas, percentage: 40 }),
+      Object.assign(new GenerationMix(), { fuel: FuelType.Wind, percentage: 20 }),
+    ];
 
-        const result = await service.getAllIntensities();
-
-        expect(mockRepo.findAll).toHaveBeenCalled();
-        expect(result).toEqual(carbonIntensityList);
+    const carbonIntensityPeriod: CarbonIntensityPeriod = Object.assign(new CarbonIntensityPeriod(), {
+      id: 1,
+      from: fromUtc,
+      to: toUtc,
+      forecast: 100,
+      actual: 95,
+      index: 'moderate',
+      generationMix: generationMix,
     });
+
+    generationMix.forEach((gm) => (gm.period = carbonIntensityPeriod));
+
+    const mockRepo: Partial<CarbonIntensityRepository> = {
+      findAll: jest.fn().mockResolvedValue([carbonIntensityPeriod]),
+    };
+
+    const service = new CarbonIntensityService(mockRepo as CarbonIntensityRepository);
+
+    const result = await service.getAll();
+
+    expect(mockRepo.findAll).toHaveBeenCalled();
+    expect(result).toEqual({
+      data: [
+        {
+          from: fromUtc,
+          to: toUtc,
+          intensity: {
+            forecast: 100,
+            actual: 95,
+            index: 'moderate',
+          },
+        },
+      ],
+    });
+  });
 });
