@@ -1,8 +1,9 @@
 import { Router } from 'express';
-import { getCarbonIntensity } from '../controllers/getCarbonIntensity.ts';
+import { getCarbonIntensity } from '../controller/getCarbonIntensity.ts';
 import { AppDataSource } from '../db/data-source.ts';
-import { CarbonIntensityRepository } from '../repository/CarbonIntensityRepository.ts';
 import { CarbonIntensity } from '../entity/CarbonIntensity.ts';
+import { CarbonIntensityRepository } from '../repository/CarbonIntensityRepository.ts';
+import { CarbonIntensityService } from '../service/CarbonIntensityService.ts';
 
 const router = Router();
 
@@ -10,6 +11,8 @@ const repository = new CarbonIntensityRepository(
     AppDataSource.getRepository(CarbonIntensity)
 );
 
-router.get('/intensity', getCarbonIntensity(repository));
+const service = new CarbonIntensityService(repository);
+const controller = getCarbonIntensity(service);
+router.get('/intensity', controller);
 
 export default router;
