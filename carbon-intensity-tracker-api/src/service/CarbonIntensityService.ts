@@ -1,7 +1,7 @@
-import { CarbonIntensityRepository } from '../repository/CarbonIntensityRepository.ts';
+import { ICarbonIntensityRepository } from '../domain/ICarbonIntensityRepository.ts';
 
 export class CarbonIntensityService {
-    constructor(private readonly repo: CarbonIntensityRepository) { }
+    constructor(private readonly repo: ICarbonIntensityRepository) { }
 
     async getAllIntensities() {
         return this.repo.findAll();
