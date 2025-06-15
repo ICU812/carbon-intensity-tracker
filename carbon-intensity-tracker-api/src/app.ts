@@ -1,32 +1,17 @@
 import express from 'express';
 import { AppDataSource } from './db/data-source.ts';
-import { CarbonIntensity } from './entity/CarbonIntensity.ts';
-import { CarbonIntensityRepository } from './repository/CarbonIntensityRepository.ts';
+import carbonIntensityRoutes from './routes/carbonIntensityRoutes.ts';
 
 const app = express();
 const PORT = 3001;
 
 app.use(express.json());
+app.use('/api', carbonIntensityRoutes);
 
 const startServer = async () => {
     try {
         await AppDataSource.initialize();
         console.log('Database connected');
-
-        // Wire up repositories
-        const carbonIntensityRepo = new CarbonIntensityRepository(
-            AppDataSource.getRepository(CarbonIntensity)
-        );
-
-        app.get('/api/intensity', async (_req, res) => {
-            try {
-                const record = await carbonIntensityRepo.findAll();
-                res.json(record);
-            } catch (err) {
-                console.error('Error fetching data:', err);
-                res.status(500).json({ error: 'Internal server error' });
-            }
-        });
 
         app.listen(PORT, () => {
             console.log(`Server running at http://localhost:${PORT}`);
@@ -34,7 +19,6 @@ const startServer = async () => {
     } catch (error) {
         console.error('Failed to start server:', error);
     }
-}
+};
 
 startServer();
-
