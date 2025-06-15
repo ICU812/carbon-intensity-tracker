@@ -1,5 +1,5 @@
 import { CarbonIntensityRepository } from '../../src/repository/CarbonIntensityRepository';
-import { CarbonIntensity } from '../../src/entity/CarbonIntensity';
+import { CarbonIntensity } from '../../src/domain/entity/CarbonIntensity';
 import { Repository } from 'typeorm';
 
 describe('CarbonIntensityRepository', () => {
