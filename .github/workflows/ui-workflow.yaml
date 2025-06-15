@@ -1,14 +1,14 @@
-name: Carbon-Intensity-Tracker-API Workflow
+name: Carbon-Intensity-Tracker-UI Workflow
 
 on:
   push:
     paths:
-      - 'carbon-intensity-tracker-api/**'
-      - '.github/workflows/api-workflow.yaml'
+      - 'carbon-intensity-tracker-ui/**'
+      - '.github/workflows/ui-workflow.yaml'
   pull_request:
     paths:
-      - 'carbon-intensity-tracker-api/**'
-      - '.github/workflows/api-workflow.yaml'
+      - 'carbon-intensity-tracker-ui/**'
+      - '.github/workflows/ui-workflow.yaml'
 
 jobs:
   build-and-test:
@@ -16,17 +16,17 @@ jobs:
 
     defaults:
       run:
-        working-directory: carbon-intensity-tracker-api
+        working-directory: carbon-intensity-tracker-ui
 
     steps:
       - name: Checkout code
-      - uses: actions/checkout@v3
+        uses: actions/checkout@v3
 
       - name: Cache node modules
         uses: actions/cache@v3
         with:
-          path: carbon-intensity-tracker-api/node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('carbon-intensity-tracker-api/package-lock.json') }}
+          path: carbon-intensity-tracker-ui/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('carbon-intensity-tracker-ui/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
 
@@ -37,12 +37,12 @@ jobs:
 
       - name: Clean install dependencies
         run: npm ci
-      
+
       - name: Build project
         run: npm run build
-      
+
       - name: Run tests
         run: npm run test
-      
+
       - name: Run tests with coverage
         run: npm run test:coverage
