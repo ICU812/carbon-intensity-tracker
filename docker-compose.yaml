@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  api:
+    build:
+      context: ./carbon-intensity-tracker-api
+    ports:
+      - "3001:3001"
+
+  ui:
+    build:
+      context: ./carbon-intensity-tracker-ui
+    ports:
+      - "8080:80"
+    depends_on:
+      - api

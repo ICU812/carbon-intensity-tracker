@@ -3,7 +3,7 @@ import { DataSource } from 'typeorm';
 import { CarbonIntensity } from '../entity/CarbonIntensity.ts';
 
 export const AppDataSource = new DataSource({
-  type: 'sqlite',
+  type: 'better-sqlite3',
   database: './src/db/carbon_intensity.sqlite',
   synchronize: true,
   logging: false,
