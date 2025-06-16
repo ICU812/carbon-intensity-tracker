@@ -22,11 +22,15 @@ describe("CarbonIntensityRepository Integration Test (UTC-safe)", () => {
     );
   });
 
+  beforeEach(async () => {
+    await dataSource.getRepository(CarbonIntensityPeriod).clear();
+  });
+
   afterAll(async () => {
     await dataSource.destroy();
   });
 
-  it("should save and retrieve a CarbonIntensityPeriod with GenerationMix (UTC-safe)", async () => {
+  const seedTestData = async () => {
     const generationMix: GenerationMix[] = [
       Object.assign(new GenerationMix(), {
         fuel: FuelType.Gas,
@@ -38,8 +42,7 @@ describe("CarbonIntensityRepository Integration Test (UTC-safe)", () => {
       }),
     ];
 
-    // ✅ Use Date.UTC() for safe UTC creation
-    const fromUtc = new Date(Date.UTC(2025, 5, 12, 0, 0, 0)); // June = 5 (0-indexed)
+    const fromUtc = new Date(Date.UTC(2025, 5, 12, 0, 0, 0));
     const toUtc = new Date(Date.UTC(2025, 5, 12, 1, 0, 0));
 
     const carbonIntensityPeriod: CarbonIntensityPeriod = Object.assign(
@@ -58,6 +61,12 @@ describe("CarbonIntensityRepository Integration Test (UTC-safe)", () => {
 
     await repository.save(carbonIntensityPeriod);
 
+    return { fromUtc, toUtc };
+  };
+
+
+  it("should save and retrieve a CarbonIntensityPeriod (UTC-safe)", async () => {
+    const { fromUtc, toUtc } = await seedTestData();
     const result = await repository.findAll();
 
     expect(result).toHaveLength(1);
@@ -68,7 +77,6 @@ describe("CarbonIntensityRepository Integration Test (UTC-safe)", () => {
     expect(period.actual).toBe(95);
     expect(period.index).toBe("moderate");
 
-    // ✅ Safe timestamp comparison (timezone-independent)
     expect(+new Date(period.from)).toBe(+fromUtc);
     expect(+new Date(period.to)).toBe(+toUtc);
 
@@ -81,5 +89,23 @@ describe("CarbonIntensityRepository Integration Test (UTC-safe)", () => {
     expect(fuels).toContain(FuelType.Wind);
     expect(percentages).toContain(40);
     expect(percentages).toContain(20);
+  });
+
+  it("should retrieve GenerationMix mapped DTOs (findAllWithGenerationMix)", async () => {
+    const { fromUtc, toUtc } = await seedTestData();
+
+    const result = await repository.findAllWithGenerationMix();
+    console.log({ result })
+
+    expect(result).toEqual([
+      {
+        from: fromUtc.toISOString(),
+        to: toUtc.toISOString(),
+        generationmix: [
+          { fuel: "gas", percentage: 40 },
+          { fuel: "wind", percentage: 20 },
+        ],
+      },
+    ]);
   });
 });
