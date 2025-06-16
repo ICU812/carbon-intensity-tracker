@@ -3,6 +3,7 @@ import { CarbonIntensityPeriod } from "../../src/domain/entity/CarbonIntensityPe
 import { GenerationMix } from "../../src/domain/entity/GenerationMix.ts";
 import { FuelType } from "../../src/domain/value-objects/FuelType.ts";
 import { Repository } from "typeorm";
+import { GenerationPeriodDTO } from "../../src/mapper/carbonIntensityMapper.ts";
 
 describe("CarbonIntensityRepository", () => {
   let repository: CarbonIntensityRepository;
@@ -47,5 +48,46 @@ describe("CarbonIntensityRepository", () => {
 
     expect(mockRepo.find).toHaveBeenCalledTimes(1);
     expect(result).toEqual([carbonIntensityPeriod]);
+  });
+
+  it("should map entities to DTOs correctly for findAllWithGenerationMix", async () => {
+    const mockEntity: CarbonIntensityPeriod = {
+      id: 1,
+      from: new Date("2024-06-16T10:00:00Z"),
+      to: new Date("2024-06-16T10:30:00Z"),
+      forecast: 200,
+      actual: 190,
+      index: "moderate",
+      generationMix: [
+        {
+          id: 1,
+          fuel: FuelType.Gas,
+          percentage: 45.2,
+          period: {} as CarbonIntensityPeriod
+        },
+        {
+          id: 2,
+          fuel: FuelType.Wind,
+          percentage: 30.5,
+          period: {} as CarbonIntensityPeriod,
+        }
+      ]
+    };
+    (mockRepo.find as jest.Mock).mockResolvedValue([mockEntity]);
+
+    const result = await repository.findAllWithGenerationMix();
+
+    const expected: GenerationPeriodDTO[] = [
+      {
+        from: "2024-06-16T10:00:00.000Z",
+        to: "2024-06-16T10:30:00.000Z",
+        generationmix: [
+          { fuel: "gas", percentage: 45.2 },
+          { fuel: "wind", percentage: 30.5 }
+        ]
+      }
+    ];
+
+    expect(result).toEqual(expected);
   });
 });
