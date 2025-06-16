@@ -23,11 +23,20 @@ const fuelTypes = [
   FuelType.Other
 ];
 
+interface CarbonIntensityCsvRow {
+  from: string;
+  to: string;
+  intensity_forecast: string;
+  intensity_actual: string;
+  index: string;
+  [fuel: string]: string;
+}
+
 async function seedCarbonIntensityData() {
   // ✅ Fully ESM-safe path resolution:
   const filePath = path.resolve(__dirname, './carbon-intensity-data.csv');
   const fileContent = fs.readFileSync(filePath, 'utf8');
-  const records: any[] = [];
+  const records: CarbonIntensityCsvRow[] = [];
 
   await new Promise<void>((resolve, reject) => {
     parse(fileContent, { columns: true, trim: true }, (err, output) => {
