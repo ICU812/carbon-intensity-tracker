@@ -64,7 +64,6 @@ describe("CarbonIntensityRepository Integration Test (UTC-safe)", () => {
     return { fromUtc, toUtc };
   };
 
-
   it("should save and retrieve a CarbonIntensityPeriod (UTC-safe)", async () => {
     const { fromUtc, toUtc } = await seedTestData();
     const result = await repository.findAll();
@@ -95,7 +94,7 @@ describe("CarbonIntensityRepository Integration Test (UTC-safe)", () => {
     const { fromUtc, toUtc } = await seedTestData();
 
     const result = await repository.findAllWithGenerationMix();
-    console.log({ result })
+    console.log({ result });
 
     expect(result).toEqual([
       {

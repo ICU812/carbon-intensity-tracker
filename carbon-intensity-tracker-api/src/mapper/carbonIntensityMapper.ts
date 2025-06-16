@@ -9,13 +9,15 @@ export interface GenerationPeriodDTO {
   }[];
 }
 
-export function mapToGenerationDTO(period: CarbonIntensityPeriod): GenerationPeriodDTO {
+export function mapToGenerationDTO(
+  period: CarbonIntensityPeriod,
+): GenerationPeriodDTO {
   return {
     from: period.from.toISOString(),
     to: period.to.toISOString(),
-    generationmix: period.generationMix.map(mix => ({
+    generationmix: period.generationMix.map((mix) => ({
       fuel: mix.fuel.toLowerCase(),
-      percentage: mix.percentage
-    }))
+      percentage: mix.percentage,
+    })),
   };
 }

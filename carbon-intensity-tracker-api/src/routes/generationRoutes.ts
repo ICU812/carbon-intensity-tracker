@@ -8,7 +8,7 @@ import { CarbonIntensityService } from "../service/CarbonIntensityService.ts";
 const router = Router();
 
 const repository = new CarbonIntensityRepository(
-  AppDataSource.getRepository(CarbonIntensityPeriod)
+  AppDataSource.getRepository(CarbonIntensityPeriod),
 );
 
 const service = new CarbonIntensityService(repository);

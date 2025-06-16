@@ -63,15 +63,15 @@ describe("CarbonIntensityRepository", () => {
           id: 1,
           fuel: FuelType.Gas,
           percentage: 45.2,
-          period: {} as CarbonIntensityPeriod
+          period: {} as CarbonIntensityPeriod,
         },
         {
           id: 2,
           fuel: FuelType.Wind,
           percentage: 30.5,
           period: {} as CarbonIntensityPeriod,
-        }
-      ]
+        },
+      ],
     };
     (mockRepo.find as jest.Mock).mockResolvedValue([mockEntity]);
 
@@ -83,9 +83,9 @@ describe("CarbonIntensityRepository", () => {
         to: "2024-06-16T10:30:00.000Z",
         generationmix: [
           { fuel: "gas", percentage: 45.2 },
-          { fuel: "wind", percentage: 30.5 }
-        ]
-      }
+          { fuel: "wind", percentage: 30.5 },
+        ],
+      },
     ];
 
     expect(result).toEqual(expected);

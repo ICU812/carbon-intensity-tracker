@@ -41,7 +41,9 @@ describe("GenerationMixController", () => {
   });
 
   it("should handle errors correctly", async () => {
-    service.getGenerationMix.mockRejectedValue(new Error("Unit test simulated DB error"));
+    service.getGenerationMix.mockRejectedValue(
+      new Error("Unit test simulated DB error"),
+    );
 
     await getGenerationMix(service)(req as Request, res as Response);
 

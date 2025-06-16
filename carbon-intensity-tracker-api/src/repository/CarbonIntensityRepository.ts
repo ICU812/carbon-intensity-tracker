@@ -4,8 +4,9 @@ import { ICarbonIntensityPeriodRepository } from "../domain/ICarbonIntensityRepo
 import { mapToGenerationDTO } from "../mapper/carbonIntensityMapper.ts";
 
 export class CarbonIntensityRepository
-  implements ICarbonIntensityPeriodRepository {
-  constructor(private readonly repo: Repository<CarbonIntensityPeriod>) { }
+  implements ICarbonIntensityPeriodRepository
+{
+  constructor(private readonly repo: Repository<CarbonIntensityPeriod>) {}
 
   async findAll() {
     return await this.repo.find();
@@ -18,7 +19,7 @@ export class CarbonIntensityRepository
   async findAllWithGenerationMix() {
     const periods = await this.repo.find({
       relations: ["generationMix"],
-      order: { from: "ASC" }
+      order: { from: "ASC" },
     });
 
     return periods.map(mapToGenerationDTO);

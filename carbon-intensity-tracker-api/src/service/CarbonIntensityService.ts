@@ -13,7 +13,7 @@ export interface CarbonIntensityPeriodDto {
 }
 
 export class CarbonIntensityService {
-  constructor(private readonly repo: ICarbonIntensityPeriodRepository) { }
+  constructor(private readonly repo: ICarbonIntensityPeriodRepository) {}
 
   async getAll(): Promise<{ data: CarbonIntensityPeriodDto[] }> {
     const periods: CarbonIntensityPeriod[] = await this.repo.findAll();

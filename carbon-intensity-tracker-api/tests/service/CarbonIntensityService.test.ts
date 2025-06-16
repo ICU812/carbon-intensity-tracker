@@ -81,7 +81,7 @@ describe("CarbonIntensityService", () => {
     };
 
     const service = new CarbonIntensityService(
-      mockRepo as CarbonIntensityRepository
+      mockRepo as CarbonIntensityRepository,
     );
 
     const result = await service.getGenerationMix();
