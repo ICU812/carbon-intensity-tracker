@@ -2,24 +2,24 @@
 Full Stack Developer Technical Interview Test — Carbon Intensity Tracker
 
 ## Description
-A REACT + Node.js web application that allows users to read, update, delete and store national carbon intensity values.
+A React + Node.js web application that allows users to read, update, delete and store national carbon intensity values.
 
-Built with:
+Tech stack:
 
-- React + Vite (frontend)
-- Node.js + Express (backend)
+- React + Vite (UI)
+- Node.js + Express (API)
 - SQLite + TypeORM (database)
 
 ## Project Structure
-- `carbon-intensity-tracker-api/` — backend (Node.js, Express, SQLite) (WIP)
-- `carbon-intensity-tracker-ui/` — frontend (React, Vite) (Not yet implemented)
-
-## Prerequisites
-
-- Node.js (>= 22.x recommended)
-- npm (>= 10.x)
+- `carbon-intensity-tracker-api/` — API server and database (Node.js, Express, SQLite)
+- `carbon-intensity-tracker-ui/` — UI application (React, Vite)
 
 ## Installation
+
+Prerequisites:
+- Node.js (>= 22.x recommended)
+- npm (>= 10.x)
+Docker (optional, for containerised deployment)
 
 1. Install dependencies:
 
@@ -30,23 +30,45 @@ cd ../carbon-intensity-tracker-ui && npm install
 
 ## Local development
 
-Before running the api for the first time, seed the database:
-
 ```bash
+# Before running the api for the first time, seed the database:
 cd carbon-intensity-tracker-api && npm run seed
-```
 
-```bash
+# In separate terminals
+
+# Start the API:
 cd carbon-intensity-tracker-api && npm run dev
+
+# Start the UI:
+cd carbon-intensity-tracker-ui && npm run dev
 ```
 
 ## API Endpoints
 
 - `GET /api/intensity` — Get all carbon intensity records
+- `GET /generation` - Planned
+- `GET /intensity/date` - Planned
+
+## Docker Deployment
+
+Build and start containers:
+
+```bash
+docker compose up --build
+```
+
+After startup:
+- API: http://localhost:3001
+- UI: http://localhost:8080
+
+To stop the containers:
+```bash
+docker compose down
+```
 
 ## Troubleshooting
 
-- Ensure database is seeded before running backend.
+- Ensure database is seeded before running API.
     - carbon-intensity-tracker-api/src/db/carbon_intensity.sqlite
 - Ensure correct Node.js version is installed.
 - Check logs if any errors occur on startup.
