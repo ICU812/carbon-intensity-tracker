@@ -26,3 +26,6 @@ ehthumbs.db
 *.swn
 .idea/
 .vscode/
+
+# ESLint cache
+.eslintcache

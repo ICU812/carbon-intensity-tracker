@@ -38,6 +38,9 @@ jobs:
       - name: Clean install dependencies
         run: npm ci
       
+      - name: Lint project
+        run: npm run lint:ci
+
       - name: Build project
         run: npm run build
       
