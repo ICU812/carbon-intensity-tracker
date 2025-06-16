@@ -1,14 +1,13 @@
 # Carbon Intensity Tracker
-Full Stack Developer Technical Interview Test — Carbon Intensity Tracker
 
-## Description
-A React + Node.js web application that allows users to read, update, delete and store national carbon intensity values.
+A React + Node.js web application that allows users to read, update, delete and store national carbon intensity values. Built as part of a technical interview.
 
 Tech stack:
 
 - React + Vite (UI)
 - Node.js + Express (API)
 - SQLite + TypeORM (database)
+- Typescript throughout
 
 ## Project Structure
 - `carbon-intensity-tracker-api/` — API server and database (Node.js, Express, SQLite)
@@ -19,7 +18,7 @@ Tech stack:
 Prerequisites:
 - Node.js (>= 22.x recommended)
 - npm (>= 10.x)
-Docker (optional, for containerised deployment)
+- Docker (optional, for containerised deployment)
 
 1. Install dependencies:
 
@@ -68,11 +67,12 @@ docker compose down
 
 ## Troubleshooting
 
-- Ensure database is seeded before running API.
+- Ensure the database is seeded before running API:
     - carbon-intensity-tracker-api/src/db/carbon_intensity.sqlite
-- Ensure correct Node.js version is installed.
+- Ensure ports `3001` (API) and `8080` (UI) are free / not in use.
+- Ensure your local setup matches the prerequisites versions.
 - Check logs if any errors occur on startup.
-
+- Use `docker compose logs` to check container logs when troubleshooting Docker.
 
 ## Authors
 Calum Brunt
