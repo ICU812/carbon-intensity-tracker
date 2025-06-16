@@ -1,5 +1,6 @@
 import { CarbonIntensityPeriod } from "../domain/entity/CarbonIntensityPeriod.ts";
 import { ICarbonIntensityPeriodRepository } from "../domain/ICarbonIntensityRepository.ts";
+import { GenerationPeriodDTO } from "../mapper/carbonIntensityMapper.ts";
 
 export interface CarbonIntensityPeriodDto {
   from: Date;
@@ -12,7 +13,7 @@ export interface CarbonIntensityPeriodDto {
 }
 
 export class CarbonIntensityService {
-  constructor(private readonly repo: ICarbonIntensityPeriodRepository) {}
+  constructor(private readonly repo: ICarbonIntensityPeriodRepository) { }
 
   async getAll(): Promise<{ data: CarbonIntensityPeriodDto[] }> {
     const periods: CarbonIntensityPeriod[] = await this.repo.findAll();
@@ -28,5 +29,9 @@ export class CarbonIntensityService {
     }));
 
     return { data };
+  }
+
+  async getGenerationMix(): Promise<GenerationPeriodDTO[]> {
+    return this.repo.findAllWithGenerationMix();
   }
 }

@@ -60,4 +60,33 @@ describe("CarbonIntensityService", () => {
       ],
     });
   });
+
+  it("should return generation mix", async () => {
+    const fromUtc = new Date(Date.UTC(2025, 5, 12, 0, 0, 0));
+    const toUtc = new Date(Date.UTC(2025, 5, 12, 1, 0, 0));
+
+    const mockGenerationDto = [
+      {
+        from: fromUtc.toISOString(),
+        to: toUtc.toISOString(),
+        generationmix: [
+          { fuel: "gas", perc: 40 },
+          { fuel: "wind", perc: 20 },
+        ],
+      },
+    ];
+
+    const mockRepo: Partial<CarbonIntensityRepository> = {
+      findAllWithGenerationMix: jest.fn().mockResolvedValue(mockGenerationDto),
+    };
+
+    const service = new CarbonIntensityService(
+      mockRepo as CarbonIntensityRepository
+    );
+
+    const result = await service.getGenerationMix();
+
+    expect(mockRepo.findAllWithGenerationMix).toHaveBeenCalled();
+    expect(result).toEqual(mockGenerationDto);
+  });
 });
