@@ -20,5 +20,6 @@ export default defineConfig([
   },
   tseslint.configs.recommended,
   { ignores: ["dist/**", "coverage/**", "node_modules/**"] },
+  prettier
 ]);
 
