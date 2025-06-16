@@ -1,18 +1,18 @@
-import type { Config } from 'jest';
+import type { Config } from "jest";
 
 const config: Config = {
-  testEnvironment: 'node',
+  testEnvironment: "node",
   transform: {
-    '^.+\\.tsx?$': [
-      'ts-jest',
+    "^.+\\.tsx?$": [
+      "ts-jest",
       {
         useESM: true,
-        tsconfig: './tsconfig.test.json'
-      }
-    ]
+        tsconfig: "./tsconfig.test.json",
+      },
+    ],
   },
-  modulePathIgnorePatterns: ['<rootDir>/dist/'],
-  collectCoverageFrom: ['src/**/*.ts']
+  modulePathIgnorePatterns: ["<rootDir>/dist/"],
+  collectCoverageFrom: ["src/**/*.ts"],
 };
 
 export default config;

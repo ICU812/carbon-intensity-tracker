@@ -1,18 +1,18 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { FuelType } from '../value-objects/FuelType.ts';
-import { CarbonIntensityPeriod } from './CarbonIntensityPeriod.ts';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { FuelType } from "../value-objects/FuelType.ts";
+import { CarbonIntensityPeriod } from "./CarbonIntensityPeriod.ts";
 
-@Entity({ name: 'generation_mix' })
+@Entity({ name: "generation_mix" })
 export class GenerationMix {
-    @PrimaryGeneratedColumn()
-    id?: number;
+  @PrimaryGeneratedColumn()
+  id?: number;
 
-    @Column()
-    fuel!: FuelType;
+  @Column()
+  fuel!: FuelType;
 
-    @Column('real')
-    percentage!: number;
+  @Column("real")
+  percentage!: number;
 
-    @ManyToOne('CarbonIntensityPeriod', 'generationMix', { onDelete: 'CASCADE' })
-    period!: Awaited<CarbonIntensityPeriod>;
+  @ManyToOne("CarbonIntensityPeriod", "generationMix", { onDelete: "CASCADE" })
+  period!: Awaited<CarbonIntensityPeriod>;
 }

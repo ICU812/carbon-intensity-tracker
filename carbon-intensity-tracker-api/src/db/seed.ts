@@ -1,11 +1,11 @@
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import { parse } from 'csv-parse';
-import { AppDataSource } from '../db/data-source.ts';
-import { CarbonIntensityPeriod } from '../domain/entity/CarbonIntensityPeriod.ts';
-import { GenerationMix } from '../domain/entity/GenerationMix.ts';
-import { FuelType } from '../domain/value-objects/FuelType.ts';
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
+import { parse } from "csv-parse";
+import { AppDataSource } from "../db/data-source.ts";
+import { CarbonIntensityPeriod } from "../domain/entity/CarbonIntensityPeriod.ts";
+import { GenerationMix } from "../domain/entity/GenerationMix.ts";
+import { FuelType } from "../domain/value-objects/FuelType.ts";
 
 // Correct __filename and __dirname replacement in ESM
 const __filename = fileURLToPath(import.meta.url);
@@ -20,7 +20,7 @@ const fuelTypes = [
   FuelType.Imports,
   FuelType.Wind,
   FuelType.Solar,
-  FuelType.Other
+  FuelType.Other,
 ];
 
 interface CarbonIntensityCsvRow {
@@ -34,8 +34,8 @@ interface CarbonIntensityCsvRow {
 
 async function seedCarbonIntensityData() {
   // ✅ Fully ESM-safe path resolution:
-  const filePath = path.resolve(__dirname, './carbon-intensity-data.csv');
-  const fileContent = fs.readFileSync(filePath, 'utf8');
+  const filePath = path.resolve(__dirname, "./carbon-intensity-data.csv");
+  const fileContent = fs.readFileSync(filePath, "utf8");
   const records: CarbonIntensityCsvRow[] = [];
 
   await new Promise<void>((resolve, reject) => {
@@ -46,12 +46,14 @@ async function seedCarbonIntensityData() {
     });
   });
 
-  const carbonIntensityRepo = AppDataSource.getRepository(CarbonIntensityPeriod);
+  const carbonIntensityRepo = AppDataSource.getRepository(
+    CarbonIntensityPeriod,
+  );
 
   for (const row of records) {
     const generationMix: GenerationMix[] = [];
 
-    fuelTypes.forEach(fuel => {
+    fuelTypes.forEach((fuel) => {
       const percentage = parseFloat(row[fuel]);
       const generationMixEntity = new GenerationMix();
       generationMixEntity.fuel = fuel;
@@ -67,25 +69,25 @@ async function seedCarbonIntensityData() {
     period.index = row.index;
     period.generationMix = generationMix;
 
-    generationMix.forEach(gm => (gm.period = period));
+    generationMix.forEach((gm) => (gm.period = period));
 
     await carbonIntensityRepo.save(period);
   }
 
-  console.log('Database successfully seeded');
+  console.log("Database successfully seeded");
 }
 
 AppDataSource.initialize()
   .then(async () => {
-    console.log('Database initialized');
+    console.log("Database initialized");
     await seedCarbonIntensityData();
     process.exit(0);
   })
   .catch((error) => {
     if (error instanceof Error) {
-      console.error('Error initializing database:', error.message);
+      console.error("Error initializing database:", error.message);
     } else {
-      console.error('Error initializing database:', JSON.stringify(error));
+      console.error("Error initializing database:", JSON.stringify(error));
     }
     process.exit(1);
   });
