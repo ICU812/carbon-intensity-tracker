@@ -15,11 +15,10 @@ export default defineConfig([
     settings: { react: { version: "detect" } },
     rules: {
       ...pluginReact.configs.recommended.rules,
-      ...pluginReact.configs['jsx-runtime'].rules,
-    }
+      ...pluginReact.configs["jsx-runtime"].rules,
+    },
   },
   tseslint.configs.recommended,
   { ignores: ["dist/**", "coverage/**", "node_modules/**"] },
-  prettier
+  prettier,
 ]);
-
